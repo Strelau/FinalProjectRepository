@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Krawiec</h2>
+<ul>
+{% for tailor in tailorers %}
+        <li>{{ tailor.name }}</li>{{ empty }}
+    {% endfor %}
+</ul>
+{% endblock %}
