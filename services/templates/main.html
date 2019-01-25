@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <p> <a href="http://127.0.0.1:8000/tailorlist">Usługi</a> </p>
+<p> <a href="http://127.0.0.1:8000/todo/">Do zrobienia</a> </p>
+<p> <a href="http://127.0.0.1:8000/accounts/signup">Rejestracja</a> </p>
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">logout</a></p>

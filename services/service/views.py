@@ -20,16 +20,22 @@ def tailor_view(request, id):
     tailor = Tailor.objects.filter(pk=id)
 
     if len(tailor) == 0:
-        return HttpResponse('nie ma')
+        return HttpResponse('brak danych')
 
     tailor = tailor[0]
     # return  HttpResponse(tailor.name)
     return render(request, 'tailor_detail.html', {'tailor': tailor})
 
-class TailorListViev(View):
+
+class TailorListView(View):
     def get(self, request):
         tailorers = Tailor.objects.all
         return render(request, "tailor_list.html", {"tailorers": tailorers})
+
+
+class ToDoListView(View):
+    def get(self, request):
+        return render(request, "todo.html")
 
 
 

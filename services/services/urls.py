@@ -19,14 +19,16 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 # from service.views import
 
-from service.views import TailorListViev, tailor_view
+from service.views import TailorListView, tailor_view, ToDoListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('main/', TemplateView.as_view(template_name='main.html'), name='home'),
     url(r'tailor/(?P<id>(\d)+)', tailor_view, name='tailor_detail'),
-    path('tailorlist/', TailorListViev.as_view(), name='TailorList'),
-    path('accounts/', include('accounts.urls'))
+    path('tailorlist/', TailorListView.as_view(), name='TailorList'),
+    path('accounts/', include('accounts.urls')),
+    path('todo/', ToDoListView.as_view()),
+
 
 ]
