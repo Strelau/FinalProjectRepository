@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Tailor detail</title>
+    {% extends 'base.html' %}
+
+
 </head>
 <body>
-
+{% block content %}
 {{ tailor.name }}
 Numer telefonu
 {{ tailor.phone }}
@@ -15,5 +18,6 @@ Godziny otwarcia PN - PT
 Godziny otwarcia SB
 {{ tailor.time_from_weekend }} --
 {{ tailor.time_to_weekend }}
+{% endblock %}
 </body>
 </html>
