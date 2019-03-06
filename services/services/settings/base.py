@@ -16,15 +16,27 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env("secrets.txt")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*t)e_r&bl#6crp84wrhok$$bk86yjfadde5$xkn)lvo^n3cx9('
+# False if not in os.environ
+DEBUG = env('DEBUG')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY')
 
+# Parse database connection url strings like psql://user:pass@127.0.0.1:8458/db
+DATABASES = {
+    # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
+    'default': env.db(),
+    # read os.environ['SQLITE_URL']
+    'extra': env.db('SQLITE_URL', default='sqlite:////tmp/my-tmp-sqlite.db')
+}
 ALLOWED_HOSTS = []
 
 
@@ -56,7 +68,7 @@ ROOT_URLCONF = 'services.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [os.path.join(BASE_DIR, '../../templates')],
+        'DIRS':  [r'/home/anderson/PycharmProjects/tailors/services/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
